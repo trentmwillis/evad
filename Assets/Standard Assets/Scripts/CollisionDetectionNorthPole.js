@@ -15,8 +15,8 @@ var charTransform : Transform;
 var iceCube : GameObject;
 
 function Start () {
-	magneticCharge = 150;
-	magneticChargeMax = 150;
+	magneticCharge = 100;
+	magneticChargeMax = 100;
 	controller = GetComponent(CharacterController);
 	thirdPersonController = GetComponent(ThirdPersonController);
 	style = new GUIStyle();
