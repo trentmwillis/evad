@@ -30,11 +30,11 @@ function Start () {
 }
 
 function Update () {
-		if(Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown(1))
 		{
 			_camButtonDown = true;
 		}
-		if(Input.GetMouseButtonUp(1))
+		else if (Input.GetMouseButtonUp(1))
 		{
 			_camButtonDown = false;
 		}

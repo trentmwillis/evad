@@ -22,6 +22,7 @@ function OnGUI() {
 	GUI.Box(Rect(Screen.width/2-header.width/4, 300, header.width/2, 310), "");
 	if(GUI.Button(Rect(Screen.width/2-header.width/4+30, 330, header.width/2-60, 50), "NEW GAME")) {
 		// Call function to start a new game
+		Application.LoadLevel("Rococo");
 	}
 	if(GUI.Button(Rect(Screen.width/2-header.width/4+30, 400, header.width/2-60, 50), "LOAD GAME")) {
 		// Call function to load a game
