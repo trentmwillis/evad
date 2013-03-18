@@ -1,22 +1,28 @@
 #pragma strict
 
-var magneticCharge = 200;
-var magneticChargeMax = 200;
-var isRepelling = false;
-var isAttracting = false;
-var controller : CharacterController;
-var thirdPersonController : ThirdPersonController;
-var style : GUIStyle;
-var texture : Texture2D;
-private var colorArrayRed : int[] = new int[magneticChargeMax];
-private var colorArrayGreen : int[] = new int[magneticChargeMax];
-private var colorArrayBlue : int[] = new int[magneticChargeMax];
-
+private var magneticCharge : int;
+private var magneticChargeMax : int;
+private var isRepelling = false;
+private var isAttracting = false;
+private var controller : CharacterController;
+private var thirdPersonController : ThirdPersonController;
+private var style : GUIStyle;
+private var texture : Texture2D;
+private var colorArrayRed : int[];
+private var colorArrayGreen : int[];
+private var colorArrayBlue : int[];
+var charTransform : Transform;
+var iceCube : GameObject;
 
 function Start () {
+	magneticCharge = 150;
+	magneticChargeMax = 150;
 	controller = GetComponent(CharacterController);
 	thirdPersonController = GetComponent(ThirdPersonController);
 	style = new GUIStyle();
+	colorArrayRed = new int[magneticChargeMax];
+	colorArrayGreen = new int[magneticChargeMax];
+	colorArrayBlue = new int[magneticChargeMax];
 	createColorsArray(magneticChargeMax, magneticChargeMax/2);
 }
 
@@ -24,14 +30,17 @@ function Start () {
     {
         var difference : int = size-n;
         
+        //Red
         var red1 : float = 255;
         var green1 : float = 0;
         var blue1 : float = 0;
         
+        //Yellow
         var red2 : float = 255;
         var green2 : float = 255;
         var blue2 : float = 0;
         
+        //Green
         var red3 : float = 0;
         var green3 : float = 255;
         var blue3 : float = 0;
@@ -107,8 +116,7 @@ function OnGUI()
 		//x
 		for(var j:int = 0; j < texture.width; j++)
 		{
-		Debug.Log(colorArrayRed[i]);
-			var color : Color = new Color(colorArrayRed[j], colorArrayGreen[j], colorArrayBlue[j]);
+			var color : Color = new Color(colorArrayRed[magneticCharge-1]/255.0, colorArrayGreen[magneticCharge-1]/255.0, colorArrayBlue[magneticCharge-1]/255.0, 0.4);
 			texture.SetPixel(j,i,color);
 		}
 	}
@@ -119,15 +127,30 @@ function OnGUI()
 
 function OnControllerColliderHit(item:ControllerColliderHit)
 {
-	switch(item.gameObject.tag)
+	switch(item.gameObject.name)
 	{
-		case "Terrain":
+		case "NPIceIslandsTerrain":
 			if(magneticCharge < magneticChargeMax)
 	    	{
-				magneticCharge = magneticCharge + 2;
+				magneticCharge = magneticCharge + 1;
 				thirdPersonController.gravity = 20;
 			}
 			isRepelling = false;
 			break;
 	}
+}
+
+function OnTriggerEnter(triggerName : Collider)
+{
+	if(triggerName.gameObject.name.Equals("Water"))
+	{
+		Debug.Log("hooray");
+		yield WaitForSeconds(0.5);
+		var iceCubeChar : GameObject = Instantiate(iceCube);
+		iceCubeChar.transform.position = charTransform.position;
+		GetComponent(CharacterController).active = false;
+		//Application.LoadLevel();
+		
+	}
+	
 }
