@@ -113,6 +113,7 @@ function Update () {
 	if(disableMovement)
 	{
 		charTransform.position = freezePosition;
+		thirdPersonController.enabled = false;
 	}
 }
 
