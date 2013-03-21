@@ -12,7 +12,9 @@ private var colorArrayRed : int[];
 private var colorArrayGreen : int[];
 private var colorArrayBlue : int[];
 var charTransform : Transform;
+var freezePosition : Vector3;
 var iceCube : GameObject;
+var disableMovement : boolean;
 
 function Start () {
 	magneticCharge = 100;
@@ -24,6 +26,8 @@ function Start () {
 	colorArrayGreen = new int[magneticChargeMax];
 	colorArrayBlue = new int[magneticChargeMax];
 	createColorsArray(magneticChargeMax, magneticChargeMax/2);
+	disableMovement = false;
+	freezePosition = Vector3.zero;
 }
 
 	function createColorsArray(size : int, n : int)
@@ -105,6 +109,11 @@ function Update () {
 	{
 		thirdPersonController.gravity = 20;
 	}
+	
+	if(disableMovement)
+	{
+		charTransform.position = freezePosition;
+	}
 }
 
 function OnGUI()
@@ -148,9 +157,8 @@ function OnTriggerEnter(triggerName : Collider)
 		yield WaitForSeconds(0.5);
 		var iceCubeChar : GameObject = Instantiate(iceCube);
 		iceCubeChar.transform.position = charTransform.position;
-		GetComponent(CharacterController).active = false;
-		//Application.LoadLevel();
-		
+		freezePosition = charTransform.position;
+		disableMovement = true;
+		//Application.LoadLevel();		
 	}
-	
 }
