@@ -2,6 +2,7 @@
 
 var bongoCount = 0;
 private var bongoFound = false;
+static var bongosFound = false;
 var bongoPic:Texture2D;
 
 function Start () {
@@ -12,6 +13,7 @@ function Update () {
 	if(bongoCount==5)
 	{
 		//be able to play w/ mayor
+		bongosFound = true;
 	}
 }
 
