@@ -1,6 +1,5 @@
 #pragma strict
 
-private var speed : float = .01;
 private var vision : float = 10;
 private var spotted : boolean = false;
 var ani : Animation;
@@ -23,9 +22,6 @@ function Update () {
 				spotted = true;
 			}
 		}
-		
-		// Move guard forward
-		transform.Translate(Vector3.forward * speed);
 	} else if(spotted && Input.GetKeyDown("return")) {
 		Time.timeScale = 1;
 		spotted = false;
