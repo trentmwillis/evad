@@ -15,7 +15,7 @@ private var currentWaypoint : int = 0;	//w Index of the waypoint this object is 
 // Do this right away, of course
 function Start () {
 	startPosition = transform.position;
-	targetPosition = GameObject.FindWithTag("Destination").transform.position;
+	targetPosition = transform.parent.Find("Waypoint").transform.position;
 	GetNewPath();
 }
 
