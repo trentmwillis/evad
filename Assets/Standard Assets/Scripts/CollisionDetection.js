@@ -4,9 +4,10 @@ var bongoCount = 0;
 private var bongoFound = false;
 static var bongosFound = false;
 var bongoPic:Texture2D;
+var style : GUIStyle;
 
 function Start () {
-
+style.fontSize = 30;
 }
 
 function Update () {
@@ -21,8 +22,8 @@ function OnGUI()
 {
 	if(bongoFound)
 	{
-		GUI.Label(Rect(0,10,100,50), bongoPic);
-		GUI.Box(Rect(10,10,25,25),bongoCount.ToString());
+		GUI.Label(Rect(0,0,80,100), bongoPic);
+		GUI.Label(Rect(75,30,25,25),bongoCount.ToString(), style);
 	}
 }
 
@@ -34,8 +35,6 @@ function OnTriggerEnter(item:Collider)
 			bongoFound = true;
 			bongoCount++;
 			Destroy(item.gameObject);
-			break;
-		case "Boots":
 			break;
 	}
 }
