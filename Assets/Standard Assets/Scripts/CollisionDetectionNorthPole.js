@@ -17,8 +17,8 @@ var iceCube : GameObject;
 var disableMovement : boolean;
 
 function Start () {
-	magneticCharge = 100;
-	magneticChargeMax = 100;
+	magneticCharge = 200;
+	magneticChargeMax = 200;
 	controller = GetComponent(CharacterController);
 	thirdPersonController = GetComponent(ThirdPersonController);
 	style = new GUIStyle();
@@ -98,7 +98,7 @@ function Update () {
     	if(magneticCharge > 1)
     	{
 			magneticCharge = magneticCharge - 1;
-			thirdPersonController.gravity = -.5;
+			thirdPersonController.gravity = -1;
 		}
 		else
 		{
@@ -154,12 +154,12 @@ function OnTriggerEnter(triggerName : Collider)
 {
 	if(triggerName.gameObject.name.Equals("Water"))
 	{
-		Debug.Log("hooray");
 		yield WaitForSeconds(0.5);
 		var iceCubeChar : GameObject = Instantiate(iceCube);
 		iceCubeChar.transform.position = charTransform.position;
 		freezePosition = charTransform.position;
 		disableMovement = true;
-		//Application.LoadLevel();		
+		yield WaitForSeconds (1);
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }
