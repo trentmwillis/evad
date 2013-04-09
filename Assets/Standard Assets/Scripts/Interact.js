@@ -6,7 +6,10 @@ var you : Transform;
 var vision : float;
 // Deteremine if player is talking to NPC
 var inConvo : boolean = false;
-var dialogue : String;
+internal var dialogue : String;
+
+// Stuff to change how the dialog box appears
+var skin : GUISkin;
 
 function Start () {
 
@@ -23,7 +26,7 @@ function Update () {
 		
 		// Cast ray from character and if it hits something do something
 		if(Physics.Raycast(you.position, forward, hit, vision)) {
-			if(hit.collider.name == "mayor_rig2") {
+			if(hit.collider.name == "RoundPound") {
 				var otherScript : NPC = hit.transform.gameObject.GetComponent("NPC");
 				dialogue = otherScript.dialogue;
 				inConvo = true;
@@ -32,13 +35,12 @@ function Update () {
 			inConvo = false;
 		}
 		
-	} else if (Input.GetButtonDown("Pause")) {
-		Application.LoadLevel("Pause_Menu");
 	}
 }
 
 function OnGUI() {
+	GUI.skin = skin;
 	if(inConvo) {
-		GUI.Label(Rect(Screen.width/2-50,Screen.height/2-50,100,100), dialogue);
+		GUI.Label(Rect(Screen.width/2-150,Screen.height/2-50,300,100), dialogue);
 	}
 }

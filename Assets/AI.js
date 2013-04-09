@@ -1,3 +1,9 @@
+/*
+ * This script contains everything for the default NPC
+ * The dialogue and pathfinding mainly
+ */
+#pragma strict
+
 // Has to be in any script using A* Pathfinding
 import Pathfinding;
 
@@ -10,7 +16,6 @@ var path2 : Path;
 var speed : float = .25;				// Speed of movement along the path
 var nextWaypointDistance : float = .5;	// Minimum distance required to move to next waypoint
 private var currentWaypoint : int = 0;	//w Index of the waypoint this object is currently at
-
 
 // Do this right away, of course
 function Start () {
