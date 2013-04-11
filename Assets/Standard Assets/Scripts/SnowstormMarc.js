@@ -5,17 +5,15 @@ var snow : ParticleAnimator;
 var marc : CharacterController;
 
 function Start () {
-timer = 1000;
-var Snowstorm = GameObject.Find("Snowstorm");
-snow = Snowstorm.GetComponent(ParticleAnimator);
+	timer = 1000;
 }
 
 function Update () {
 	timer--;
 	if(timer == 0)
 	{
-		
-		//Reload the level
+		// Reload the level
+		Application.LoadLevel(Application.loadedLevel);
 	}
 	if(timer > 900)
 	{
@@ -47,9 +45,9 @@ function OnControllerColliderHit(item:ControllerColliderHit)
 {
 	switch(item.gameObject.name)
 	{
-		case "Flag":
-			//reset timer
-			timer += 1000;
+		case "Pole":
+			// Reset timer
+			timer = 1000;
 			break;
 	}
 }

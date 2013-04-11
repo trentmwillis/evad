@@ -39,40 +39,38 @@ function Start () {
 }
 
 function Update () {
-counter++;
-if(counter < 150)
-{
-	camera1.transform.Rotate(0, 1, 0);
-}
-else if(counter>= 150 && counter < 170)
-{
-	camera1.transform.Rotate(0, 1, 0);
-	alpha += Mathf.Clamp01(Time.deltaTime/3);
-}
-else
-{
-	camera1.active = false;
-}
-if(Input.GetMouseButtonDown(0))
-{
-	camera1.active = false;   
- 	Debug.Log("DOWN");  
-}
+	counter++;
+	if(counter < 150)
+	{
+		camera1.transform.Rotate(0, 1, 0);
+	}
+	else if(counter>= 150 && counter < 170)
+	{
+		camera1.transform.Rotate(0, 1, 0);
+		alpha += Mathf.Clamp01(Time.deltaTime/3);
+	}
+	else
+	{
+		camera1.active = false;
+	}
+	if(Input.GetMouseButtonDown(0))
+	{
+		camera1.active = false;   
+	}
 }
 
 function OnGUI()
 {
-if(counter < 170)
-{
-	Debug.Log(EditorApplication.currentScene);
-	style.fontSize = 40;
-	style.alignment = TextAnchor.MiddleCenter;
-	GUI.Label(Rect(Screen.width/2-150,Screen.height/2-100,300,100), levelName, style);
-}
-if(counter >= 150 && counter <= 170)
-{
-	GUI.color = new Color(alpha, alpha, alpha, alpha);
-	GUI.DrawTexture(Rect(0,0,Screen.width, Screen.height), texture);
-}
+	if(counter < 170)
+	{
+		style.fontSize = 40;
+		style.alignment = TextAnchor.MiddleCenter;
+		GUI.Label(Rect(Screen.width/2-150,Screen.height/2-100,300,100), levelName, style);
+	}
+	if(counter >= 150 && counter <= 170)
+	{
+		GUI.color = new Color(alpha, alpha, alpha, alpha);
+		GUI.DrawTexture(Rect(0,0,Screen.width, Screen.height), texture);
+	}
 }
 
