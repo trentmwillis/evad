@@ -53,6 +53,11 @@ else
 {
 	camera1.active = false;
 }
+if(Input.GetMouseButtonDown(0))
+{
+	camera1.active = false;   
+ 	Debug.Log("DOWN");  
+}
 }
 
 function OnGUI()
@@ -70,3 +75,4 @@ if(counter >= 150 && counter <= 170)
 	GUI.DrawTexture(Rect(0,0,Screen.width, Screen.height), texture);
 }
 }
+

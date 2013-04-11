@@ -32,6 +32,7 @@ if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/North Pole_Vi
 	else if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Rococo.unity"))
 	{
 		audio.clip = rococo;
+		audio.volume = 0;
 	}
 	else if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Roundpound_Exterior.unity"))
 	{
@@ -61,6 +62,16 @@ if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/North Pole_Vi
 	audio.Play();
 }
 
-function Update () {
+function fadeIn() {
+    if (audio.volume < 1) {
+        audio.volume += 0.1 * Time.deltaTime;
+    }
+}
 
+function Update () {
+if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Rococo.unity"))
+	{
+		fadeIn();
+	}
+		
 }
