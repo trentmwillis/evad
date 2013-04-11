@@ -2,20 +2,19 @@
 var keyboardSound : AudioClip;
 
 function Start () {
-
 }
 
 function Update () {
 
 }
 
-function OnTriggerEnter(item:Collider)
+function OnControllerColliderHit(item:Collider)
 {
-	switch(item.gameObject.name)
+	Debug.Log(item.gameObject.name.ToString());
+	if(item.gameObject.name.Equals("Keyboard"))
 	{
-		case "Keyboard":
 			Debug.Log("SDKLFJLSDKFJLKSDJFLSD");
+			audio.clip = keyboardSound;
 			audio.Play();
-			break;
 	}
 }
