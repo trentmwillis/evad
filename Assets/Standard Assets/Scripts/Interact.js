@@ -26,7 +26,7 @@ function Update () {
 		
 		// Cast ray from character and if it hits something do something
 		if(Physics.Raycast(you.position, forward, hit, vision)) {
-			if(hit.collider.name == "RoundPound") {
+			if(hit.collider.name == "RoundPound" || hit.collider.name == "repelf") {
 				var otherScript : NPC = hit.transform.gameObject.GetComponent("NPC");
 				dialogue = otherScript.dialogue;
 				inConvo = true;

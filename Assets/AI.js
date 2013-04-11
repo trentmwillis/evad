@@ -26,12 +26,12 @@ function Start () {
 
 // This function will generate a new path from the object to the targetPosition
 function GetNewPath() {
-	path2 = seeker.StartPath(targetPosition, startPosition);
-	path = seeker.StartPath(startPosition, targetPosition, OnPathComplete);
+	path = seeker.StartPath(startPosition, targetPosition, OnPathComplete);	
 }
 
 // This function will be called when the seeker has finished determining the path
 function OnPathComplete(newPath : Path) {
+	path2 = seeker.StartPath(targetPosition, startPosition);
 	// First, make sure there are no errors
 	if(!newPath.error) {
 		// Set the path to be the new path
