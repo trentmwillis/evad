@@ -14,8 +14,8 @@ function Start ()
 
 function Update () 
 {
-	if(CollisionDetection.bongosFound)
-	{
+	//if(CollisionDetection.bongosFound)
+	//{
 		if(Input.GetKeyDown("1"))
 		{
 			audio.PlayOneShot(bongo1);
@@ -36,5 +36,5 @@ function Update ()
 		{
 			audio.PlayOneShot(bongo5);
 		}
-	}	
+	//}	
 }

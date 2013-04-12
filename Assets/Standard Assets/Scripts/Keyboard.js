@@ -7,7 +7,7 @@ function Start () {
 function Update () {
 
 }
-
+/*
 function OnControllerColliderHit(item:Collider)
 {
 	Debug.Log(item.gameObject.name.ToString());
@@ -17,4 +17,4 @@ function OnControllerColliderHit(item:Collider)
 			audio.clip = keyboardSound;
 			audio.Play();
 	}
-}
+}*/
