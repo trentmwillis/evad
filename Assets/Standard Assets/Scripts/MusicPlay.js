@@ -13,7 +13,7 @@ var rpInterior3 : AudioClip;
 //var rpInterior4 : AudioClip;
 
 function Start () {
-if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/North Pole_Village.unity"))
+	if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/North Pole_Village.unity"))
 	{
 		audio.clip = northPoleVillage;
 	}
@@ -48,7 +48,7 @@ if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/North Pole_Vi
 	}
 	else if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Roundpound_Level3.unity"))
 	{
-		audio.clip = rpExterior;
+		audio.clip = rpInterior3;
 	}
 	else if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Roundpound_Final.unity"))
 	{
@@ -69,8 +69,7 @@ function fadeIn() {
 }
 
 function Update () {
-if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Rococo.unity"))
-	{
+	if(EditorApplication.currentScene.ToString().Equals("Assets/Scenes/Rococo.unity")) {
 		fadeIn();
 	}
 		

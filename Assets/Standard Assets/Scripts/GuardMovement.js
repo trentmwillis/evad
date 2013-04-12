@@ -14,10 +14,11 @@ function Update () {
 		// Check in front for detection
 		var hit : RaycastHit;
 		var forward = transform.TransformDirection(Vector3(0,0,10));
-		var position = Vector3(transform.position.x, transform.position.y+1, transform.position.z);
+		var position = Vector3(transform.position.x, transform.position.y+.2, transform.position.z);
 		
 		if(Physics.Raycast(position, forward, hit, vision)) {
-			if(hit.collider.name == "3rd Person Controller") {
+			Debug.Log(hit.collider.name);
+			if(hit.collider.name == "Marc") {
 				// Player is spotted, so display dialog
 				spotted = true;
 			}
