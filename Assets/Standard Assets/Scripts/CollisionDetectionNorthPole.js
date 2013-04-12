@@ -17,8 +17,8 @@ var iceCube : GameObject;
 var disableMovement : boolean;
 
 function Start () {
-	magneticCharge = 200;
-	magneticChargeMax = 200;
+	magneticCharge = 80;
+	magneticChargeMax = 80;
 	controller = GetComponent(CharacterController);
 	thirdPersonController = GetComponent(ThirdPersonController);
 	style = new GUIStyle();
@@ -80,38 +80,42 @@ function Start () {
     }
     
 function Update () {
-	if (Input.GetKeyDown ("f"))
-	{
-		//Repelling
+
+	// Check controls for the boots
+	if (Input.GetKeyDown ("f")) {
+		// Toggle repulsion
 		isRepelling = !isRepelling;
 	}
-	if (Input.GetKeyDown ("g"))
-	{
-		//Attraction
+	if (Input.GetKeyDown ("g")) {
+		// Toggle attraction
 		isAttracting = true;
 		isRepelling = false;
 		thirdPersonController.gravity = 1;
 	}
     
-    if(isRepelling)
-    {
-    	if(magneticCharge > 1)
-    	{
+    // Repelling from ground
+    if(isRepelling) {
+    	// There is still charge in the boots
+    	if(magneticCharge > 1) {
 			magneticCharge = magneticCharge - 1;
-			thirdPersonController.gravity = -1;
+			if(transform.position.y >= 110) {
+				thirdPersonController.gravity = 0;
+			} else {
+				thirdPersonController.gravity = -1;
+			}
 		}
-		else
-		{
+		// There is no charge left
+		else {
 			thirdPersonController.gravity = 20;
 		}
 	}
-	else
-	{
+	
+	// Not repelling from ground
+	else {
 		thirdPersonController.gravity = 20;
 	}
 	
-	if(disableMovement)
-	{
+	if(disableMovement) {
 		charTransform.position = freezePosition;
 		thirdPersonController.enabled = false;
 	}
@@ -135,30 +139,26 @@ function OnGUI()
 	GUI.Box(Rect(10,10,magneticCharge,20), "", style);
 }
 
-function OnControllerColliderHit(item:ControllerColliderHit)
-{
-	switch(item.gameObject.name)
-	{
-		case "NPIceIslandsTerrain":
-			if(magneticCharge < magneticChargeMax)
-	    	{
+function OnControllerColliderHit(item:ControllerColliderHit) {
+	// If touching the ground
+	if(item.gameObject.name == "Terrain") {
+			// Fill the charge back up
+			if(magneticCharge < magneticChargeMax) {
 				magneticCharge = magneticCharge + 1;
 				thirdPersonController.gravity = 20;
 			}
-			isRepelling = false;
-			break;
 	}
 }
 
-function OnTriggerEnter(triggerName : Collider)
-{
-	if(triggerName.gameObject.name.Equals("Water"))
-	{
+function OnTriggerEnter(triggerName : Collider) {
+	if(triggerName.gameObject.name.Equals("Water")) {
 		yield WaitForSeconds(0.5);
 		var iceCubeChar : GameObject = Instantiate(iceCube);
 		iceCubeChar.transform.position = charTransform.position;
 		freezePosition = charTransform.position;
 		disableMovement = true;
+		
+		// Wait a second and then restart the level
 		yield WaitForSeconds (1);
 		Application.LoadLevel(Application.loadedLevel);
 	}
