@@ -57,3 +57,13 @@ function OnTriggerExit(item:Collider)
 			break;
 	}
 }
+
+function OnTriggerStay(item:Collider)
+{
+	switch(item.gameObject.name)
+	{
+		case "Keyboard":
+			lowerVolume.volume=0.4;
+			break;
+	}
+}
