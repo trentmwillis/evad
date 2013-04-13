@@ -29,7 +29,7 @@ function OnGUI() {
 	
 	if(GUI.Button(Rect(Screen.width/2-header.width/4+30, 330, header.width/2-60, 50), "NEW GAME")) {
 		// Call function to start a new game
-		Application.LoadLevel("Rococo");
+		Application.LoadLevel(1);
 	}
 	
 	// Check if there is a save game
