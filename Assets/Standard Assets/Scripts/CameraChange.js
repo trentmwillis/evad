@@ -41,11 +41,11 @@ function Update () {
 	counter++;
 	if(counter < 150)
 	{
-		camera1.transform.Rotate(0, 1, 0);
+		camera1.transform.Rotate(0, .5, 0);
 	}
 	else if(counter>= 150 && counter < 170)
 	{
-		camera1.transform.Rotate(0, 1, 0);
+		camera1.transform.Rotate(0, .5, 0);
 		alpha += Mathf.Clamp01(Time.deltaTime/3);
 	}
 	else
