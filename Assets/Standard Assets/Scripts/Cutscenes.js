@@ -6,12 +6,14 @@ var cuts2 : Texture2D[];
 var cuts3 : Texture2D[];
 var cuts4 : Texture2D[];
 var cuts5 : Texture2D[];
-var voiceovers0 :AudioClip[];
-var voiceovers1 :AudioClip[];
-var voiceovers2 :AudioClip[];
+var cuts6 : Texture2D[];
+var voiceovers0 : AudioClip[];
+var voiceovers1 : AudioClip[];
+var voiceovers2 : AudioClip[];
 var voiceovers3 : AudioClip[];
-var voiceovers4 :AudioClip[];
-var voiceovers5 :AudioClip[];
+var voiceovers4 : AudioClip[];
+var voiceovers5 : AudioClip[];
+var voiceovers6 : AudioClip[];
 
 var cutsInScene : Texture2D[];
 var audioInScene: AudioClip[];
@@ -25,6 +27,7 @@ var counter = 0;
 
 var texture : Texture2D;
 var style : GUIStyle;
+internal var music : GameObject;
 
 function Start () 
 {
@@ -33,8 +36,8 @@ function Start ()
 	texture.Apply();
 	
 	display = true;
-	cutsPerScene = [15, 10, 2, 11, 8, 3];
-			
+	cutsPerScene = [15, 8, 2, 11, 8, 3, 1];
+	
 	// Intro level
 	if(Application.loadedLevelName == "Intro") 
 	{
@@ -48,6 +51,9 @@ function Start ()
 	// Rococo level
 	else if(Application.loadedLevelName == "Rococo") 
 	{
+		music = GameObject.Find("Music");
+		music.SetActive(false);
+		
 		levelNumber=1;
 		cutsInScene = cuts1;
 		audioInScene = voiceovers1;
@@ -56,12 +62,23 @@ function Start ()
 		//0-1 arrival -- this plays at the beginning
 		
 		//2-7 First mayor convo -- plays when first talking to mayor, says to find bongos
+	}
+	
+	// Second mayor convo -- plays at end of rococo level before going to bongo playing level
+	else if(Application.loadedLevelName == "Rococo_Mayor") 
+	{
+		music = GameObject.Find("Music");
+		music.SetActive(false);
 		
-		//8 Second mayor convo -- plays at end of rococo level before going to bongo playing level
+		levelNumber=6;
+		cutsInScene = cuts6;
+		audioInScene = voiceovers6;
+		sceneNumber = 0;
+		maxSceneNumber = cutsPerScene[levelNumber];
 	}
 	
 	// Rococo mayor level
-	else if(Application.loadedLevelName == "Rococo_Mayor") 
+	else if(Application.loadedLevelName == "Rococo_Final") 
 	{
 		//this is the 2 departure stills, they appear after you win the bongo game
 		levelNumber=2;
@@ -74,6 +91,9 @@ function Start ()
 	// North Pole levels
 	else if(Application.loadedLevelName == "North_Pole_Village") 
 	{
+		music = GameObject.Find("Music");
+		music.SetActive(false);
+	
 		levelNumber=3;
 		cutsInScene = cuts3;
 		audioInScene = voiceovers3;
@@ -83,7 +103,7 @@ function Start ()
 		//3-10 Repelf convo -- trigger when you talk to repelf, after transition to snowstorm level
 	}
 	
-	else if(Application.loadedLevelName == "North_Pole_Maze")
+	else if(Application.loadedLevelName == "North_Pole_Final")
 	{
 		//play all of these once you reach the cottage, ending should go to roundpound exterior level
 		levelNumber=4;
@@ -95,7 +115,7 @@ function Start ()
 	// Roundpound level
 	else if(Application.loadedLevelName == "Roundpound_Final") 
 	{
-		//different frames, depending on choice from user
+		//Different frames, depending on choice from user
 		//0-2 parade!
 		//3-6 explosion!
 		//7-9 pope!
@@ -109,22 +129,43 @@ function Start ()
 
 function Update () 
 {
-	//special cases
-	//make display = true;
-	if(display)
-	{
-		if(!audio.isPlaying)
-		{
-			if(sceneNumber < maxSceneNumber)
-			{
+	// Special cases
+	// Make display = true;
+	if(display) {
+		if(!audio.isPlaying) {
+			// Check for special cases
+			// Rococo cases
+			// intro
+			if(levelNumber == 1 && sceneNumber == 2) {
+				display = false;
+				music.SetActive(true);
+				return;
+			}
+			
+			// Mayor Convo 1
+			if(levelNumber == 1 && sceneNumber == 8) {
+				display = false;
+				music.SetActive(true);
+				return;
+			}
+			
+			// North Pole cases
+			if(levelNumber == 3 && sceneNumber == 3) {
+				display = false;
+				music.SetActive(true);
+				return;
+			}
+			
+			if(sceneNumber < maxSceneNumber) {
 				audio.clip=audioInScene[sceneNumber];
 				audio.PlayOneShot(audio.clip);
 				audio.Play();
 				sceneNumber++;
 			}
-			else
-			{
-				display = false;
+			else {
+				if (levelNumber != 5) { display = false; }
+				if(levelNumber == 0 || levelNumber == 2 || levelNumber == 4) { Application.LoadLevel(Application.loadedLevel+1); }
+				else if(levelNumber == 1 || levelNumber == 3) { music.SetActive(true); }
 			}
 		}
 	}
@@ -132,6 +173,8 @@ function Update ()
 
 function OnGUI()
 {
+	// Make sure it draws on top of everything
+	GUI.depth = -10;
 	if(display)
 	{
 		style = GUI.skin.GetStyle("Label");

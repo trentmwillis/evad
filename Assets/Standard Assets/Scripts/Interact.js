@@ -33,6 +33,8 @@ function Update () {
 		
 		// Cast ray from character and if it hits something do something
 		var otherScript : NPC;
+		var cuts : Cutscenes;
+		var music : GameObject;
 		if(Physics.Raycast(you.position, forward, hit, vision)) {
 			if(hit.collider.name == "RoundPound" || hit.collider.name == "repelf" ||
 				hit.collider.name == "clef1" || hit.collider.name == "Clef2" ||
@@ -41,12 +43,23 @@ function Update () {
 				dialogue = otherScript.dialogue;
 				inConvo = true;
 			} else if(hit.collider.name == "Mayor") {
-				otherScript = hit.transform.gameObject.GetComponent("NPC");
-				dialogue = otherScript.dialogue;
-				inConvo = true;
+				cuts = GameObject.Find("Cutscenes").GetComponent("Cutscenes");
+				cuts.display = true;
+				cuts.sceneNumber += 1;
+				
+				music = GameObject.Find("Music");
+				music.SetActive(false);
+				
 				for(var i=1; i<5; i++) {
 					bongos[i].active = true;
 				}
+			} else if(hit.collider.name == "Head Repelf") {
+				cuts = GameObject.Find("Cutscenes").GetComponent("Cutscenes");
+				cuts.display = true;
+				cuts.sceneNumber += 1;
+				
+				music = GameObject.Find("Music");
+				music.SetActive(false);
 			}
 		} else {
 			inConvo = false;

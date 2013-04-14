@@ -16,7 +16,9 @@ var nextLevel : GameObject;
 
 function Start () {
 	style.fontSize = 30;
-	nextLevel.active = false;
+	nextLevel.active = true;
+	if(Application.loadedLevelName == "Rococo") { nextLevel.active = false; }
+	
 }
 
 function Update () {

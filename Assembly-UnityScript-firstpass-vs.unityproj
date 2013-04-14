@@ -44,7 +44,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\CameraChange.js" />
      <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
      <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
      <Compile Include="Assets\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
@@ -55,9 +54,11 @@
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\MouseOrbit.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\SmoothFollow.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\SmoothLookAt.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\CameraChange.js" />
      <Compile Include="Assets\Standard Assets\Scripts\CameraScriptMarc.js" />
      <Compile Include="Assets\Standard Assets\Scripts\CollisionDetection.js" />
      <Compile Include="Assets\Standard Assets\Scripts\CollisionDetectionNorthPole.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\Cutscenes.js" />
      <Compile Include="Assets\Standard Assets\Scripts\DialogBox.js" />
      <Compile Include="Assets\Standard Assets\Scripts\FadeTransition.js" />
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\DragRigidbody.js" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\Standard Assets\Scripts\Interact.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Keyboard.js" />
      <Compile Include="Assets\Standard Assets\Scripts\LookAt.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\MagneticBoots.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MainMenuGUI.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MayorPlayScript.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MusicPlay.js" />
@@ -73,10 +75,12 @@
      <Compile Include="Assets\Standard Assets\Scripts\NextLevel.js" />
      <Compile Include="Assets\Standard Assets\Scripts\PauseMenuGUI.js" />
      <Compile Include="Assets\Standard Assets\Scripts\PrevLevel.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\RococoAnimation.js" />
      <Compile Include="Assets\Standard Assets\Scripts\SaveGame.js" />
      <Compile Include="Assets\Standard Assets\Scripts\SettingsMenuGUI.js" />
-     <Compile Include="Assets\Standard Assets\Scripts\SnowstormMarc.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\Snowstorm.js" />
      <Compile Include="Assets\Standard Assets\Scripts\TreeScript.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\clefPlay.js" />
      <None Include="Assets\AstarPathfindingEditor\Editor\EditorAssets\Materials\Navmesh.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Specular.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Cut Out Opaque Bump.shader" />
