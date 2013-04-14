@@ -33,7 +33,7 @@ function Start ()
 	mayorPlay = true;
 	win = false;
 	mayorAnimations = new Array();
-	mayor = GameObject.Find("Mayor_bongo");
+	mayor = GameObject.Find("Mayor_Bongo");
 	style = new GUIStyle();
 	style.fontSize = 20;
 	style.normal.textColor = Color.white;
@@ -60,6 +60,7 @@ function OnGUI () {
     {
     	style.fontSize = 20;
     	GUI.Box (Rect (Screen.width/2-60, Screen.height/2, 500,30), "Thanks for your help! \nTake a tank of gas for your troubles.", style);
+    	Application.LoadLevel(Application.loadedLevel + 1);
     }
 }
 
@@ -159,49 +160,50 @@ function checkSequence()
 	correct = true;
 }
 
-function mayorAnimation()
-{
-if(!win)
-{
-	yield WaitForSeconds(1);
-	for(var i = 0; i < mayorCount; i++)
-	{
-		if(bongoSequence[i] == 1)
+function mayorAnimation() {
+	if(!win) {
+		yield WaitForSeconds(1);
+		for(var i = 0; i < mayorCount; i++)
 		{
-			mayorNumber = 1;
-			mayor.animation.Play("Bongo1");
-			yield WaitForSeconds(1);
-			audio.PlayOneShot(bongo1);
+			if(bongoSequence[i] == 1)
+			{
+				mayorNumber = 1;
+				mayor.animation.Play("Bongo1");
+				yield WaitForSeconds(1);
+				audio.PlayOneShot(bongo1);
+			}
+			else if(bongoSequence[i] == 2)
+			{
+				mayorNumber = 2;
+				mayor.animation.Play("Bongo2");
+				yield WaitForSeconds(1);
+				audio.PlayOneShot(bongo2);
+			}
+			else if(bongoSequence[i] == 3)
+			{
+				mayorNumber = 3;
+				mayor.animation.Play("Bongo3");
+				yield WaitForSeconds(1);
+				audio.PlayOneShot(bongo3);
+			}
+			else if(bongoSequence[i] == 4)
+			{
+				mayorNumber = 4;
+				mayor.animation.Play("Bongo4");
+				yield WaitForSeconds(1);
+				audio.PlayOneShot(bongo4);
+			}
+			else if(bongoSequence[i] == 5)
+			{
+				mayorNumber = 5;
+				mayor.animation.Play("Bongo5");
+				yield WaitForSeconds(1);
+				audio.PlayOneShot(bongo5);
+			}
+			mayorNumber = -1;
 		}
-		else if(bongoSequence[i] == 2)
-		{
-			mayorNumber = 2;
-			mayor.animation.Play("Bongo2");
-			yield WaitForSeconds(1);
-			audio.PlayOneShot(bongo2);
-		}
-		else if(bongoSequence[i] == 3)
-		{
-			mayorNumber = 3;
-			mayor.animation.Play("Bongo3");
-			yield WaitForSeconds(1);
-			audio.PlayOneShot(bongo3);
-		}
-		else if(bongoSequence[i] == 4)
-		{
-			mayorNumber = 4;
-			mayor.animation.Play("Bongo4");
-			yield WaitForSeconds(1);
-			audio.PlayOneShot(bongo4);
-		}
-		else if(bongoSequence[i] == 5)
-		{
-			mayorNumber = 5;
-			mayor.animation.Play("Bongo5");
-			yield WaitForSeconds(1);
-			audio.PlayOneShot(bongo5);
-		}
-		mayorNumber = -1;
-	}
+	} else {
+		yield WaitForSeconds(1);
+		Application.LoadLevel(Application.loadedLevel+1);
 	}
 }

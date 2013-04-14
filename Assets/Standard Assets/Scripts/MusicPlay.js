@@ -18,10 +18,13 @@ function Start () {
 		audio.clip = startMenu;
 	}
 
-	// Rococo level
+	// Rococo levels
 	else if(Application.loadedLevelName == "Rococo") {
 		audio.clip = rococo;
-		audio.volume = 0;
+	}
+	else if(Application.loadedLevelName == "Rococo_Mayor") {
+		audio.clip = rococo;
+		audio.volume = .5;
 	}
 
 	// North Pole levels
@@ -43,10 +46,10 @@ function Start () {
 		audio.clip = rpExterior;
 	}
 	else if(Application.loadedLevelName == "Roundpound_Level1") {
-		audio.clip = rpExterior;
+		audio.clip = rpInterior1;
 	}
 	else if(Application.loadedLevelName == "Roundpound_Level2") {
-		audio.clip = rpExterior;
+		audio.clip = rpInterior2;
 	}
 	else if(Application.loadedLevelName == "Roundpound_Level3") {
 		audio.clip = rpInterior3;
@@ -56,19 +59,19 @@ function Start () {
 	}
 	
 	// Set the audio to loop and then start
+	if(Application.loadedLevelName != "Rococo_Mayor") { audio.volume = 0; }
 	audio.loop = true;
 	audio.Play();
 }
 
+// Function to fade in level music
 function fadeIn() {
     if (audio.volume < 1) {
         audio.volume += 0.1 * Time.deltaTime;
     }
 }
 
+// Checks to see if music should be faded in
 function Update () {
-	if(Application.loadedLevelName == "Rococo") {
-		fadeIn();
-	}
-		
+	if(Application.loadedLevelName != "Rococo_Mayor") { fadeIn(); }
 }

@@ -11,8 +11,15 @@ internal var dialogue : String;
 // Stuff to change how the dialog box appears
 var skin : GUISkin;
 
-function Start () {
+var bongos : GameObject[] = new GameObject[5];
 
+function Start () {
+	if(Application.loadedLevelName == "Rococo") {
+		bongos[0].active = true;
+		for(var i=1; i<5; i++) {
+			bongos[i].active = false;
+		}	
+	}
 }
 
 function Update () {
@@ -25,11 +32,21 @@ function Update () {
 		var hit : RaycastHit;
 		
 		// Cast ray from character and if it hits something do something
+		var otherScript : NPC;
 		if(Physics.Raycast(you.position, forward, hit, vision)) {
-			if(hit.collider.name == "RoundPound" || hit.collider.name == "repelf") {
-				var otherScript : NPC = hit.transform.gameObject.GetComponent("NPC");
+			if(hit.collider.name == "RoundPound" || hit.collider.name == "repelf" ||
+				hit.collider.name == "clef1" || hit.collider.name == "Clef2" ||
+				hit.collider.name == "clef3" || hit.collider.name == "Clef4") {
+				otherScript = hit.transform.gameObject.GetComponent("NPC");
 				dialogue = otherScript.dialogue;
 				inConvo = true;
+			} else if(hit.collider.name == "Mayor") {
+				otherScript = hit.transform.gameObject.GetComponent("NPC");
+				dialogue = otherScript.dialogue;
+				inConvo = true;
+				for(var i=1; i<5; i++) {
+					bongos[i].active = true;
+				}
 			}
 		} else {
 			inConvo = false;

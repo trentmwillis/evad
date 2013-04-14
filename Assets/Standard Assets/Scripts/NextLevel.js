@@ -27,8 +27,10 @@ function Update () {
 }
 
 function OnTriggerEnter (item:Collider) {
-	triggerTime = Time.timeSinceLevelLoad;
-	triggered = true;
+	if(item.gameObject.name == "Marc") {
+		triggerTime = Time.timeSinceLevelLoad;
+		triggered = true;
+	}
 }
 
 function OnGUI () {

@@ -1,15 +1,22 @@
 #pragma strict
 
-var bongoCount = 0;
-private var bongoFound = false;
-static var bongosFound = false;
-var bongoPic:Texture2D;
+// Variables to keep track of bongos
+internal var bongoCount = 0;
+internal var bongoFound = false;
+internal var bongosFound = false;
+var bongoPic : Texture2D;
 var style : GUIStyle;
+
+// Variables to handle the sound
+// of the keyboard sidewalk
 var keyboardSound : AudioClip;
 var lowerVolume: AudioSource;
 
+var nextLevel : GameObject;
+
 function Start () {
-style.fontSize = 30;
+	style.fontSize = 30;
+	nextLevel.active = false;
 }
 
 function Update () {
@@ -17,6 +24,7 @@ function Update () {
 	{
 		//be able to play w/ mayor
 		bongosFound = true;
+		nextLevel.active = true;
 	}
 }
 
