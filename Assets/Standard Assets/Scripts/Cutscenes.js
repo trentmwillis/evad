@@ -17,15 +17,22 @@ var cutsInScene : Texture2D[];
 
 var cutsPerScene : int[];
 var levelNumber = -1;
-var display : boolean;
+public static var display : boolean;
 var sceneNumber = -1;
 var maxSceneNumber = 0;
 var counter = 0;
 
+var texture : Texture2D;
+var style : GUIStyle;
+
 function Start () 
 {
-	display = false;
-	cutsPerScene = [0,0,0,11];//13, 10, 2, 11, 8, 3];
+	texture = Texture2D(1,1);
+	texture.SetPixel(0,0,Color.black);
+	texture.Apply();
+	
+	display = true;
+	cutsPerScene = [0,0,0,3];//13, 10, 2, 11, 8, 3];
 //	cuts0 = new Texture2D[13];
 //	cuts1 = new Texture2D[10];
 //	cuts2 = new Texture2D[2];
@@ -105,23 +112,22 @@ function Update ()
 {
 	//special cases
 	//make display = true;
-	counter ++;
-	
-	if(counter > 200)
+	if(display)
 	{
-		display = true;
-		audio.clip=voiceovers3[0];
-		audio.PlayOneShot(audio.clip);
-		audio.Play();
-		if(sceneNumber < maxSceneNumber)
+		if(!audio.isPlaying)
 		{
-			sceneNumber++;
+			if(sceneNumber < maxSceneNumber)
+			{
+				audio.clip=voiceovers3[sceneNumber];
+				audio.PlayOneShot(audio.clip);
+				audio.Play();
+				sceneNumber++;
+			}
+			else
+			{
+				display = false;
+			}
 		}
-		else
-		{
-			display = false;
-		}
-		counter = 0;
 	}
 }
 
@@ -129,6 +135,10 @@ function OnGUI()
 {
 	if(display)
 	{
-		GUI.Label(Rect(0,0,Screen.width,Screen.height), cutsInScene[sceneNumber-1]);
+		style = GUI.skin.GetStyle("Label");
+		style.alignment = TextAnchor.MiddleCenter;
+	
+		GUI.DrawTexture(Rect(0,0,Screen.width, Screen.height), texture);
+		GUI.Label(Rect(0,0,Screen.width,Screen.height), cutsInScene[sceneNumber-1], style);
 	}
 }

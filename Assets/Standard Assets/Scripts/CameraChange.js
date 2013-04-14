@@ -38,15 +38,19 @@ function Start () {
 }
 
 function Update () {
-	counter++;
+counter++;
+	if(Cutscenes.display)
+	{
+		counter = 0;
+	}
 	if(counter < 150)
 	{
 		camera1.transform.Rotate(0, .5, 0);
 	}
-	else if(counter>= 150 && counter < 170)
+	else if(counter>= 150 && counter < 200)
 	{
 		camera1.transform.Rotate(0, .5, 0);
-		alpha += Mathf.Clamp01(Time.deltaTime/3);
+		alpha += Mathf.Clamp01(Time.deltaTime/1.3);
 	}
 	else
 	{
@@ -60,13 +64,13 @@ function Update () {
 
 function OnGUI()
 {
-	if(counter < 170)
+	if(counter < 200)
 	{
 		style.fontSize = 40;
 		style.alignment = TextAnchor.MiddleCenter;
 		GUI.Label(Rect(Screen.width/2-150,Screen.height/2-100,300,100), levelName, style);
 	}
-	if(counter >= 150 && counter <= 170)
+	if(counter >= 150 && counter <= 200)
 	{
 		GUI.color = new Color(alpha, alpha, alpha, alpha);
 		GUI.DrawTexture(Rect(0,0,Screen.width, Screen.height), texture);
