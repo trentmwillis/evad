@@ -17,7 +17,7 @@ var cutsInScene : Texture2D[];
 
 var cutsPerScene : int[];
 var levelNumber = -1;
-public static var display : boolean;
+public static var display = false;
 var sceneNumber = -1;
 var maxSceneNumber = 0;
 var counter = 0;
