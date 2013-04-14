@@ -1,19 +1,20 @@
 #pragma strict
 
-//var cuts0 : Texture2D[];
-//var cuts1 : Texture2D[];
-//var cuts2 : Texture2D[];
+var cuts0 : Texture2D[];
+var cuts1 : Texture2D[];
+var cuts2 : Texture2D[];
 var cuts3 : Texture2D[];
-//var cuts4 : Texture2D[];
-//var cuts5 : Texture2D[];
-//var voiceovers0 :AudioClip[];
-//var voiceovers1 :AudioClip[];
-//var voiceovers2 :AudioClip[];
+var cuts4 : Texture2D[];
+var cuts5 : Texture2D[];
+var voiceovers0 :AudioClip[];
+var voiceovers1 :AudioClip[];
+var voiceovers2 :AudioClip[];
 var voiceovers3 : AudioClip[];
-//var voiceovers4 :AudioClip[];
-//var voiceovers5 :AudioClip[];
+var voiceovers4 :AudioClip[];
+var voiceovers5 :AudioClip[];
 
 var cutsInScene : Texture2D[];
+var audioInScene: AudioClip[];
 
 var cutsPerScene : int[];
 var levelNumber = -1;
@@ -32,26 +33,14 @@ function Start ()
 	texture.Apply();
 	
 	display = true;
-	cutsPerScene = [0,0,0,3];//13, 10, 2, 11, 8, 3];
-//	cuts0 = new Texture2D[13];
-//	cuts1 = new Texture2D[10];
-//	cuts2 = new Texture2D[2];
-//	cuts3 = new Texture2D[11];
-//	cuts4 = new Texture2D[8];
-//	cuts5 = new Texture2D[3];
-//
-//	voiceovers0 = new AudioClip[13];
-//	voiceovers1 = new AudioClip[10];
-//	voiceovers2 = new AudioClip[2];
-//	voiceovers3 = new AudioClip[11];
-//	voiceovers4 = new AudioClip[8];
-//	voiceovers5 = new AudioClip[3];
+	cutsPerScene = [15, 10, 2, 11, 8, 3];
 			
 	// Intro level
 	if(Application.loadedLevelName == "Intro") 
 	{
 		levelNumber = 0;
-		//cutsInScene = cuts0;
+		cutsInScene = cuts0;
+		audioInScene = voiceovers0;
 		sceneNumber = 0;
 		maxSceneNumber = cutsPerScene[levelNumber];
 	}
@@ -60,21 +49,24 @@ function Start ()
 	else if(Application.loadedLevelName == "Rococo") 
 	{
 		levelNumber=1;
-		//cutsInScene = cuts1;
+		cutsInScene = cuts1;
+		audioInScene = voiceovers1;
 		sceneNumber = 0;
 		maxSceneNumber = cutsPerScene[levelNumber];
-		//0-2 arrival
+		//0-1 arrival -- this plays at the beginning
 		
-		//3-8 First mayor convo
+		//2-7 First mayor convo -- plays when first talking to mayor, says to find bongos
 		
-		//9 Second mayor convo
+		//8 Second mayor convo -- plays at end of rococo level before going to bongo playing level
 	}
 	
 	// Rococo mayor level
 	else if(Application.loadedLevelName == "Rococo_Mayor") 
 	{
+		//this is the 2 departure stills, they appear after you win the bongo game
 		levelNumber=2;
-		//cutsInScene = cuts2;
+		cutsInScene = cuts2;
+		audioInScene = voiceovers2;
 		sceneNumber = 0;
 		maxSceneNumber = cutsPerScene[levelNumber];
 	}
@@ -84,27 +76,34 @@ function Start ()
 	{
 		levelNumber=3;
 		cutsInScene = cuts3;
+		audioInScene = voiceovers3;
 		sceneNumber = 0;
 		maxSceneNumber = cutsPerScene[levelNumber];
-		//0-2 arrival
-		//3-10 Repelf convo
+		//0-2 arrival -- play at beginning of level
+		//3-10 Repelf convo -- trigger when you talk to repelf, after transition to snowstorm level
 	}
 	
 	else if(Application.loadedLevelName == "North_Pole_Maze")
 	{
+		//play all of these once you reach the cottage, ending should go to roundpound exterior level
 		levelNumber=4;
-		//cutsInScene = cuts4;
+		cutsInScene = cuts4;
+		audioInScene = voiceovers4;
 		maxSceneNumber = cutsPerScene[levelNumber];
 		sceneNumber = 0;
 	}
 	// Roundpound level
 	else if(Application.loadedLevelName == "Roundpound_Final") 
 	{
+		//different frames, depending on choice from user
+		//0-2 parade!
+		//3-6 explosion!
+		//7-9 pope!
 		levelNumber=5;
-		//cutsInScene = cuts5;
+		cutsInScene = cuts5;
+		audioInScene = voiceovers5;
 		sceneNumber = 0;
 		maxSceneNumber = cutsPerScene[levelNumber];
-		//0 1 2 for different endings
 	}
 }
 
@@ -118,7 +117,7 @@ function Update ()
 		{
 			if(sceneNumber < maxSceneNumber)
 			{
-				audio.clip=voiceovers3[sceneNumber];
+				audio.clip=audioInScene[sceneNumber];
 				audio.PlayOneShot(audio.clip);
 				audio.Play();
 				sceneNumber++;
