@@ -161,11 +161,10 @@ function Update ()
 				audio.PlayOneShot(audio.clip);
 				audio.Play();
 				sceneNumber++;
-			}
-			else {
+			} else {
 				if (levelNumber != 5) { display = false; }
 				if(levelNumber == 0 || levelNumber == 2 || levelNumber == 4) { Application.LoadLevel(Application.loadedLevel+1); }
-				else if(levelNumber == 1 || levelNumber == 3) { music.SetActive(true); }
+				else if(levelNumber == 1 || levelNumber == 3 || levelNumber == 6) { music.SetActive(true); }
 			}
 		}
 	}
