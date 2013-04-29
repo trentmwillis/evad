@@ -18,12 +18,20 @@ function Start () {
 
 function Update () {
 	if(triggered) {
-		currentColor = Color.Lerp(startColor, endColor, (Time.time-triggerTime)/duration);
-		
-		if(currentColor == endColor) {
-			Application.LoadLevel(Application.loadedLevel + 1);
+		if((Application.loadedLevelName == "North_Pole_Village") && (Interact.moveOn==true)) {
+			currentColor = Color.Lerp(startColor, endColor, (Time.time-triggerTime)/duration);
+				if(currentColor == endColor) {
+					Application.LoadLevel(Application.loadedLevel + 1);
+			}
 		}
-	}
+		else{
+				currentColor = Color.Lerp(startColor, endColor, (Time.time-triggerTime)/duration);
+			
+				if(currentColor == endColor) {
+					Application.LoadLevel(Application.loadedLevel + 1);
+				}
+			}
+		}
 }
 
 function OnTriggerEnter (item:Collider) {

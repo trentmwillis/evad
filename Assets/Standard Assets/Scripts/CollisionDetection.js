@@ -35,7 +35,7 @@ function OnGUI()
 	if(bongoFound)
 	{
 		GUI.Label(Rect(0,0,80,100), bongoPic);
-		GUI.Label(Rect(75,30,25,25),bongoCount.ToString(), style);
+		GUI.Label(Rect(75,30,25,25),bongoCount.ToString() + "/5", style);
 	}
 }
 
@@ -53,6 +53,7 @@ function OnTriggerEnter(item:Collider)
 			audio.loop = true;
 			audio.Play();
 			lowerVolume.volume=0.4;
+			transform.position.y = transform.position.y + .6;
 			break;
 	}
 }

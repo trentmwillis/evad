@@ -8,6 +8,8 @@ var vision : float;
 var inConvo : boolean = false;
 internal var dialogue : String;
 
+public static var moveOn = false;
+
 // Stuff to change how the dialog box appears
 var skin : GUISkin;
 
@@ -57,7 +59,7 @@ function Update () {
 				cuts = GameObject.Find("Cutscenes").GetComponent("Cutscenes");
 				cuts.display = true;
 				cuts.sceneNumber += 1;
-				
+				moveOn = true;
 				music = GameObject.Find("Music");
 				music.SetActive(false);
 			}
@@ -69,8 +71,10 @@ function Update () {
 }
 
 function OnGUI() {
+	GUI.skin.label.normal.textColor = Color.black;
 	GUI.skin = skin;
 	if(inConvo) {
-		GUI.Label(Rect(Screen.width/2-150,Screen.height/2-50,300,100), dialogue);
+		GUI.Label(Rect(Screen.width/2-150,Screen.height/2-150,300,100), dialogue);
+		//GUI.Box(Rect(Screen.width/2-150,Screen.height/2-150,300,100), "");
 	}
 }

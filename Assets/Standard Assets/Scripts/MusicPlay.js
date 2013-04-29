@@ -55,7 +55,7 @@ function Start () {
 		audio.clip = rpInterior3;
 	}
 	else if(Application.loadedLevelName == "Roundpound_Final") {
-		audio.clip = rpExterior;
+		audio.clip = rpInterior2;
 	}
 	
 	// Set the audio to loop and then start

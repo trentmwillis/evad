@@ -22,6 +22,8 @@ private var colorArrayBlue : int[];
 internal var disableMovement : boolean = false;
 internal var freezePosition : Vector3 = Vector3.zero;
 
+public static var hasDied = false;
+
 var thirdPersonController : ThirdPersonController;
 
 // Represents the model the character
@@ -164,6 +166,8 @@ function OnTriggerEnter(triggerName : Collider) {
 		// Freeze the character
 		freezePosition = transform.position;
 		disableMovement = true;
+		
+		hasDied = true;
 		
 		// Wait a second and then restart the level
 		yield WaitForSeconds (1);

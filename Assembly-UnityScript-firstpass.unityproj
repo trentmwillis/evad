@@ -64,12 +64,14 @@
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\DragRigidbody.js" />
      <Compile Include="Assets\Standard Assets\Scripts\GuardMovement.js" />
      <Compile Include="Assets\Standard Assets\Scripts\HUD.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\Instructions.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Interact.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Keyboard.js" />
      <Compile Include="Assets\Standard Assets\Scripts\LookAt.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MagneticBoots.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MainMenuGUI.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MayorPlayScript.js" />
+     <Compile Include="Assets\Standard Assets\Scripts\MistaJeph.js" />
      <Compile Include="Assets\Standard Assets\Scripts\MusicPlay.js" />
      <Compile Include="Assets\Standard Assets\Scripts\NPC.js" />
      <Compile Include="Assets\Standard Assets\Scripts\NextLevel.js" />

@@ -25,6 +25,8 @@ var sceneNumber = -1;
 var maxSceneNumber = 0;
 var counter = 0;
 
+public static var hasTalkedMayor = false;
+
 var texture : Texture2D;
 var style : GUIStyle;
 internal var music : GameObject;
@@ -36,7 +38,7 @@ function Start ()
 	texture.Apply();
 	
 	display = true;
-	cutsPerScene = [15, 8, 2, 11, 8, 3, 1];
+	cutsPerScene = [16, 8, 2, 11, 8, 3, 1];
 	
 	// Intro level
 	if(Application.loadedLevelName == "Intro") 
@@ -102,15 +104,21 @@ function Start ()
 		//0-2 arrival -- play at beginning of level
 		//3-10 Repelf convo -- trigger when you talk to repelf, after transition to snowstorm level
 	}
-	
 	else if(Application.loadedLevelName == "North_Pole_Final")
 	{
 		//play all of these once you reach the cottage, ending should go to roundpound exterior level
+		display = true;
 		levelNumber=4;
 		cutsInScene = cuts4;
 		audioInScene = voiceovers4;
 		maxSceneNumber = cutsPerScene[levelNumber];
 		sceneNumber = 0;
+	}
+	else if(Application.loadedLevelName == "North_Pole_Maze")
+	{
+		
+		display = false;
+
 	}
 	// Roundpound level
 	else if(Application.loadedLevelName == "Roundpound_Final") 
@@ -122,15 +130,24 @@ function Start ()
 		levelNumber=5;
 		cutsInScene = cuts5;
 		audioInScene = voiceovers5;
-		sceneNumber = 0;
-		maxSceneNumber = cutsPerScene[levelNumber];
+		
+		display = false;
 	}
 }
+
+var inLastLevel = false;
 
 function Update () 
 {
 	// Special cases
 	// Make display = true;
+	if(Input.GetMouseButtonDown(1)&&Application.loadedLevelName != "Intro" &&Application.loadedLevelName != "North_Pole_Final" && display)
+	{
+		sceneNumber++;
+		display = false;
+		audio.Stop();
+		music.SetActive(true);
+	}
 	if(display) {
 		if(!audio.isPlaying) {
 			// Check for special cases
@@ -146,6 +163,7 @@ function Update ()
 			if(levelNumber == 1 && sceneNumber == 8) {
 				display = false;
 				music.SetActive(true);
+				hasTalkedMayor = true;
 				return;
 			}
 			
@@ -156,20 +174,56 @@ function Update ()
 				return;
 			}
 			
+			if(levelNumber == 5 && !inLastLevel)
+			{
+				if(MistaJeph.choice == "Bongo")
+				{
+					inLastLevel = true;
+					sceneNumber = 0;
+					maxSceneNumber = 6;
+				}
+				if(MistaJeph.choice == "Boots")
+				{
+					inLastLevel = true;
+					sceneNumber = 6;
+					maxSceneNumber = 13;
+				}
+				if(MistaJeph.choice == "Both")
+				{
+					inLastLevel = true;
+					sceneNumber = 13;
+					maxSceneNumber = 19;
+				}
+			}
+			
 			if(sceneNumber < maxSceneNumber) {
 				audio.clip=audioInScene[sceneNumber];
 				audio.PlayOneShot(audio.clip);
 				audio.Play();
 				sceneNumber++;
+
 			} else {
 				if (levelNumber != 5) { display = false; }
-				if(levelNumber == 0 || levelNumber == 2 || levelNumber == 4) { Application.LoadLevel(Application.loadedLevel+1); }
+				if(levelNumber == 0 ){ 
+					if(Instructions.instructionsOver)
+					{
+						Application.LoadLevel(Application.loadedLevel+1);
+						Debug.Log("HEY");
+					}
+					else
+					{
+						displayInstructions = true;
+					}
+				}
+				
+				if( levelNumber == 2 || levelNumber == 4) { Application.LoadLevel(Application.loadedLevel+1); }
 				else if(levelNumber == 1 || levelNumber == 3 || levelNumber == 6) { music.SetActive(true); }
+				if(levelNumber == 5) {Application.LoadLevel(0);}
 			}
 		}
 	}
 }
-
+public static var displayInstructions = false;
 function OnGUI()
 {
 	// Make sure it draws on top of everything

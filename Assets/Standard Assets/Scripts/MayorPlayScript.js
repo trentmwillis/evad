@@ -33,10 +33,11 @@ function Start ()
 	mayorPlay = true;
 	win = false;
 	mayorAnimations = new Array();
-	mayor = GameObject.Find("Mayor_Bongo");
+	mayor = GameObject.Find("Mayor_bongo");
 	style = new GUIStyle();
-	style.fontSize = 20;
+	style.fontSize = 25;
 	style.normal.textColor = Color.white;
+	style.alignment = TextAnchor.MiddleCenter;
 	incorrect = false;
 }
 
@@ -44,22 +45,22 @@ function OnGUI () {
 	GUI.contentColor = Color.white;
 	if(mayorPlay)
 	{
-    	GUI.Box (Rect (Screen.width/15, Screen.height/2, 500,30), "Use the number keys to follow the Mayor's beat. Click on the screen to start.", style);
+    	GUI.Box (Rect (Screen.width/4, Screen.height/2, 500,30), "Use the number keys (1 - 5) to follow the Mayor's beat. Click on the screen to start.", style);
     }
     if(mayorNumber != -1)
     {
-    	style.fontSize = 16;
-    	GUI.Label (Rect (Screen.width/2, 2*Screen.height/3+25, 100, 20), "" + mayorNumber);
+    	style.fontSize = 30;
+    	GUI.Label (Rect (Screen.width/2, 2*Screen.height/3+25, 100, 20), "" + mayorNumber, style);
     }
     if(incorrect)
     {
     	style.fontSize = 20;
-    	GUI.Box (Rect (Screen.width/2-60, Screen.height/2, 500,30), "You didn't follow me very well. \nClick to try again", style);
+    	GUI.Box (Rect (Screen.width/4, Screen.height/2, 500,30), "You didn't follow me very well. \nClick to try again", style);
     }
     if(win)
     {
-    	style.fontSize = 20;
-    	GUI.Box (Rect (Screen.width/2-60, Screen.height/2, 500,30), "Thanks for your help! \nTake a tank of gas for your troubles.", style);
+    	style.fontSize = 25;
+    	GUI.Box (Rect (Screen.width/4, Screen.height/2, 500,30), "Thanks for your help! \nTake a tank of gas for your troubles.", style);
     	Application.LoadLevel(Application.loadedLevel + 1);
     }
 }
